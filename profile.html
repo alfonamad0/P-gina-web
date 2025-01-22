@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}</h1>
+    <form action="{{ url_for('profile') }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required><br>
+        <textarea name="caption" placeholder="Write a caption..." required></textarea><br>
+        <button type="submit">Post</button>
+    </form>
+    <h2>Your Posts:</h2>
+    {% for post in posts %}
+        <div>
+            <img src="{{ url_for('static', filename='uploads/' + post.image_filename) }}" width="200">
+            <p>{{ post.caption }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>
